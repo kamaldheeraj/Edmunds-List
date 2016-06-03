@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  Edmunds List
 //
 //  Created by Kamal Dandamudi on 6/3/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,5 +21,9 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func cancelRegistration(segue:UIStoryboardSegue){
+        
+    }
+    
 }
 
