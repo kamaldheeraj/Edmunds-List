@@ -28,7 +28,8 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         emailTextField.delegate = self
         userNameTextField.delegate = self
-        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange), forControlEvents: .EditingChanged)
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,10 +47,29 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
     
     //Text Field Delegate
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textFieldDidChange(textField:UITextField) {
         if textField == passwordTextField{
+            if let string = textField.text{
+                if string.rangeOfCharacterFromSet(NSCharacterSet.alphanumericCharacterSet().invertedSet) != nil{
+                    specialCharacterRequirementLabel.backgroundColor = UIColor.greenColor()
+                }
+                else{
+                    specialCharacterRequirementLabel.backgroundColor = UIColor.lightGrayColor()
+                }
+                if string.rangeOfCharacterFromSet(NSCharacterSet.decimalDigitCharacterSet()) != nil{
+                    numberRequirementLabel.backgroundColor = UIColor.greenColor()
+                }
+                else{
+                    numberRequirementLabel.backgroundColor = UIColor.lightGrayColor()
+                }
+                if string.characters.count > 8{
+                    eightCharactersRequirementLabel.backgroundColor = UIColor.greenColor()
+                }
+                else{
+                    eightCharactersRequirementLabel.backgroundColor = UIColor.lightGrayColor()
+                }
+            }
         }
-        return true
     }
     
     
