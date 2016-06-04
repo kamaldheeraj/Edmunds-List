@@ -19,6 +19,9 @@
 		289E68621D0314FB00539747 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E68611D0314FB00539747 /* DataManager.swift */; };
 		289E68691D0315EE00539747 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E68671D0315EE00539747 /* User+CoreDataProperties.swift */; };
 		289E686A1D0315EE00539747 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E68681D0315EE00539747 /* User.swift */; };
+		289E686C1D0339C900539747 /* WebserviceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E686B1D0339C900539747 /* WebserviceHelper.swift */; };
+		289E686F1D034C6400539747 /* Car+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E686D1D034C6400539747 /* Car+CoreDataProperties.swift */; };
+		289E68701D034C6400539747 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E686E1D034C6400539747 /* Car.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +40,9 @@
 		289E68611D0314FB00539747 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		289E68671D0315EE00539747 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		289E68681D0315EE00539747 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		289E686B1D0339C900539747 /* WebserviceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebserviceHelper.swift; sourceTree = "<group>"; };
+		289E686D1D034C6400539747 /* Car+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		289E686E1D034C6400539747 /* Car.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,7 @@
 				289E68571D02064B00539747 /* ViewControllers */,
 				289E68651D0315A700539747 /* DataModel */,
 				289E683F1D01F91F00539747 /* AppDelegate.swift */,
+				289E686B1D0339C900539747 /* WebserviceHelper.swift */,
 				289E685C1D030F9F00539747 /* Edmunds List-Bridging-Header.h */,
 				289E68491D01F91F00539747 /* Assets.xcassets */,
 				289E684E1D01F91F00539747 /* Info.plist */,
@@ -94,6 +101,8 @@
 		289E68651D0315A700539747 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				289E686D1D034C6400539747 /* Car+CoreDataProperties.swift */,
+				289E686E1D034C6400539747 /* Car.swift */,
 				289E68671D0315EE00539747 /* User+CoreDataProperties.swift */,
 				289E68681D0315EE00539747 /* User.swift */,
 				289E68461D01F91F00539747 /* Edmunds_List.xcdatamodeld */,
@@ -183,12 +192,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				289E686F1D034C6400539747 /* Car+CoreDataProperties.swift in Sources */,
 				289E68591D0208C900539747 /* DashboardListViewController.swift in Sources */,
+				289E68701D034C6400539747 /* Car.swift in Sources */,
 				289E68621D0314FB00539747 /* DataManager.swift in Sources */,
 				289E68691D0315EE00539747 /* User+CoreDataProperties.swift in Sources */,
 				289E68481D01F91F00539747 /* Edmunds_List.xcdatamodeld in Sources */,
 				289E68601D0311B100539747 /* Utils.swift in Sources */,
 				289E686A1D0315EE00539747 /* User.swift in Sources */,
+				289E686C1D0339C900539747 /* WebserviceHelper.swift in Sources */,
 				289E68421D01F91F00539747 /* HomeViewController.swift in Sources */,
 				289E68551D0203B400539747 /* RegistrationViewController.swift in Sources */,
 				289E68401D01F91F00539747 /* AppDelegate.swift in Sources */,

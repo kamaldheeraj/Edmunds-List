@@ -80,4 +80,72 @@ class DataManager{
         }
     }
     
+    // Function to insert/update a new car
+    class func upsertCar(car:NSDictionary){
+        let managedObjectContext = appDelegate.managedObjectContext
+        
+        let modelID = car["modelID"] as! String
+        let modelName = car["modelName"] as! String
+        let modelNiceName = car["modelNiceName"] as! String
+        let year = car["year"] as! Int
+        let modelYearID = car["modelYearID"] as! Int
+        let makeName = car["makeName"] as! String
+        let makeNiceName = car["makeNiceName"] as! String
+        let makeID = car["makeID"] as! Int
+        
+        let fetchRequest = NSFetchRequest(entityName: "Car")
+        let predicate = NSPredicate(format: "modelID = %@ AND modelName = %@ AND modelNiceName = %@ AND year = %d AND modelYearID = %d", modelID, modelName, modelNiceName, year, modelYearID)
+        
+        fetchRequest.predicate = predicate
+        do{
+            let results = try managedObjectContext.executeFetchRequest(fetchRequest)
+            if results.count > 0{
+                let carEntity = results[0] as! Car
+                carEntity.modelID = modelID
+                carEntity.modelName = modelName
+                carEntity.modelNiceName = modelNiceName
+                carEntity.modelYearID = modelYearID
+                carEntity.year = year
+                carEntity.makeID = makeID
+                carEntity.makeName = makeName
+                carEntity.makeNiceName = makeNiceName
+                try managedObjectContext.save()
+            }
+            else{
+                let carEntity = NSEntityDescription.insertNewObjectForEntityForName("Car", inManagedObjectContext: managedObjectContext) as! Car
+                carEntity.modelID = modelID
+                carEntity.modelName = modelName
+                carEntity.modelNiceName = modelNiceName
+                carEntity.modelYearID = modelYearID
+                carEntity.year = year
+                carEntity.makeID = makeID
+                carEntity.makeName = makeName
+                carEntity.makeNiceName = makeNiceName
+                try managedObjectContext.save()
+            }
+        }
+        catch let error as NSError{
+            print("Error while inserting car : \(error.userInfo)")
+        }
+    }
+    
+    class func fetchCars(fetchOffset:Int,fetchLimit:Int)->(carList:[Car]?,totalCount:Int){
+        let managedObjectContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Car")
+        var error:NSError? = nil
+        let totalCount = managedObjectContext.countForFetchRequest(fetchRequest, error: &error)
+        fetchRequest.fetchLimit = fetchLimit
+        fetchRequest.fetchOffset = fetchOffset
+        do{
+            guard let results = try managedObjectContext.executeFetchRequest(fetchRequest) as? [Car] else{
+                return (nil,0)
+            }
+            return (results,totalCount)
+        }
+        catch let error as NSError{
+            print("Error while fetching cars : \(error.userInfo)")
+            return (nil,0)
+        }
+    }
+    
 }
