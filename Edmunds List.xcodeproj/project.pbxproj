@@ -15,6 +15,10 @@
 		289E684D1D01F91F00539747 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 289E684B1D01F91F00539747 /* LaunchScreen.storyboard */; };
 		289E68551D0203B400539747 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E68541D0203B400539747 /* RegistrationViewController.swift */; };
 		289E68591D0208C900539747 /* DashboardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E68581D0208C900539747 /* DashboardListViewController.swift */; };
+		289E68601D0311B100539747 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E685F1D0311B100539747 /* Utils.swift */; };
+		289E68621D0314FB00539747 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E68611D0314FB00539747 /* DataManager.swift */; };
+		289E68691D0315EE00539747 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E68671D0315EE00539747 /* User+CoreDataProperties.swift */; };
+		289E686A1D0315EE00539747 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E68681D0315EE00539747 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,11 @@
 		289E684E1D01F91F00539747 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		289E68541D0203B400539747 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		289E68581D0208C900539747 /* DashboardListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardListViewController.swift; sourceTree = "<group>"; };
+		289E685C1D030F9F00539747 /* Edmunds List-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Edmunds List-Bridging-Header.h"; sourceTree = "<group>"; };
+		289E685F1D0311B100539747 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		289E68611D0314FB00539747 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		289E68671D0315EE00539747 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		289E68681D0315EE00539747 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,13 +69,13 @@
 		289E683E1D01F91F00539747 /* Edmunds List */ = {
 			isa = PBXGroup;
 			children = (
-				289E683F1D01F91F00539747 /* AppDelegate.swift */,
-				289E68431D01F91F00539747 /* Main.storyboard */,
+				289E68661D0315C400539747 /* Storyboards */,
 				289E68571D02064B00539747 /* ViewControllers */,
+				289E68651D0315A700539747 /* DataModel */,
+				289E683F1D01F91F00539747 /* AppDelegate.swift */,
+				289E685C1D030F9F00539747 /* Edmunds List-Bridging-Header.h */,
 				289E68491D01F91F00539747 /* Assets.xcassets */,
-				289E684B1D01F91F00539747 /* LaunchScreen.storyboard */,
 				289E684E1D01F91F00539747 /* Info.plist */,
-				289E68461D01F91F00539747 /* Edmunds_List.xcdatamodeld */,
 			);
 			path = "Edmunds List";
 			sourceTree = "<group>";
@@ -77,8 +86,29 @@
 				289E68411D01F91F00539747 /* HomeViewController.swift */,
 				289E68541D0203B400539747 /* RegistrationViewController.swift */,
 				289E68581D0208C900539747 /* DashboardListViewController.swift */,
+				289E685F1D0311B100539747 /* Utils.swift */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		289E68651D0315A700539747 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				289E68671D0315EE00539747 /* User+CoreDataProperties.swift */,
+				289E68681D0315EE00539747 /* User.swift */,
+				289E68461D01F91F00539747 /* Edmunds_List.xcdatamodeld */,
+				289E68611D0314FB00539747 /* DataManager.swift */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
+		289E68661D0315C400539747 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				289E684B1D01F91F00539747 /* LaunchScreen.storyboard */,
+				289E68431D01F91F00539747 /* Main.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,7 +184,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				289E68591D0208C900539747 /* DashboardListViewController.swift in Sources */,
+				289E68621D0314FB00539747 /* DataManager.swift in Sources */,
+				289E68691D0315EE00539747 /* User+CoreDataProperties.swift in Sources */,
 				289E68481D01F91F00539747 /* Edmunds_List.xcdatamodeld in Sources */,
+				289E68601D0311B100539747 /* Utils.swift in Sources */,
+				289E686A1D0315EE00539747 /* User.swift in Sources */,
 				289E68421D01F91F00539747 /* HomeViewController.swift in Sources */,
 				289E68551D0203B400539747 /* RegistrationViewController.swift in Sources */,
 				289E68401D01F91F00539747 /* AppDelegate.swift in Sources */,
@@ -270,11 +304,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Edmunds List/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kamaldandamudi.edmundslist.Edmunds-List";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Edmunds List/Edmunds List-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -282,11 +319,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Edmunds List/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kamaldandamudi.edmundslist.Edmunds-List";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Edmunds List/Edmunds List-Bridging-Header.h";
 			};
 			name = Release;
 		};

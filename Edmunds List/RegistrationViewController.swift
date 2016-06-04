@@ -39,6 +39,11 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
     @IBAction func registerAction(sender: AnyObject) {
         //Validate Field Data
         if areFieldsValid(){
+            let user = NSMutableDictionary()
+            user["email"] = emailTextField.text!
+            user["userName"] = userNameTextField.text!
+            user["password"] = passwordTextField.text!.stringBySHA256()!
+            DataManager.insertUser(user)
             self.performSegueWithIdentifier("registrationDashboardSegue", sender: self)
         }
         return
@@ -76,8 +81,7 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
     private func areFieldsValid()->Bool{
         //Check if email is empty
         if emailTextField.text == nil || emailTextField.text == ""{
-            emailTextField.layer.borderWidth = 1
-            emailTextField.layer.borderColor = UIColor.redColor().CGColor
+            highlightTextField(emailTextField)
             errorLabel.text = "Email cannot be blank."
             return false
         }
@@ -89,8 +93,7 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
         
         //Check if username is empty
         if userNameTextField.text == nil || userNameTextField.text == ""{
-            userNameTextField.layer.borderWidth = 1
-            userNameTextField.layer.borderColor = UIColor.redColor().CGColor
+            highlightTextField(userNameTextField)
             errorLabel.text = "User cannot be blank."
             return false
         }
@@ -102,8 +105,7 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
         
         //Check if password is empty
         if passwordTextField.text == nil || passwordTextField.text == ""{
-            passwordTextField.layer.borderWidth = 1
-            passwordTextField.layer.borderColor = UIColor.redColor().CGColor
+            highlightTextField(passwordTextField)
             errorLabel.text = "Password cannot be blank."
             return false
         }
@@ -128,8 +130,7 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
             let specialCharRegEx = try NSRegularExpression(pattern: "[^a-z0-9]", options: .CaseInsensitive)
             if specialCharRegEx.firstMatchInString(password, options: NSMatchingOptions(), range: NSMakeRange(0, password.characters.count)) == nil{
                 errorLabel.text = "Password should contain at least 1 special character"
-                passwordTextField.layer.borderWidth = 1
-                passwordTextField.layer.borderColor = UIColor.redColor().CGColor
+                highlightTextField(passwordTextField)
                 return false
             }
             
@@ -137,19 +138,16 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
             let numericalRegEx = try NSRegularExpression(pattern: "[0-9]", options: NSRegularExpressionOptions())
             if numericalRegEx.firstMatchInString(password, options: NSMatchingOptions(), range: NSMakeRange(0, password.characters.count)) == nil{
                 errorLabel.text = "Password should contain at least 1 number"
-                passwordTextField.layer.borderWidth = 1
-                passwordTextField.layer.borderColor = UIColor.redColor().CGColor
+                highlightTextField(passwordTextField)
                 return false
             }
-            passwordTextField.layer.borderWidth = 0
-            passwordTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
+            resetTextField(passwordTextField)
             errorLabel.text = ""
             return true
         }
         catch{
             errorLabel.text = "Error while creating regular expression. Please try again!"
-            passwordTextField.layer.borderWidth = 1
-            passwordTextField.layer.borderColor = UIColor.redColor().CGColor
+            highlightTextField(passwordTextField)
             return false
         }
     }
@@ -161,19 +159,21 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
             let specialCharRegEx = try NSRegularExpression(pattern: "[0-9]", options: .CaseInsensitive)
             if specialCharRegEx.firstMatchInString(userName, options: NSMatchingOptions(), range: NSMakeRange(0, userName.characters.count)) != nil{
                 errorLabel.text = "User Name should not contain any numbers"
-                userNameTextField.layer.borderWidth = 1
-                userNameTextField.layer.borderColor = UIColor.redColor().CGColor
+                highlightTextField(userNameTextField)
                 return false
             }
-            userNameTextField.layer.borderWidth = 0
-            userNameTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
+            if DataManager.isUserPresentWithUserName(userName){
+                errorLabel.text = "User with user name \"\(userName)\" already exists."
+                highlightTextField(userNameTextField)
+                return false
+            }
+            resetTextField(userNameTextField)
             errorLabel.text = ""
             return true
         }
         catch{
             errorLabel.text = "Error while creating regular expression. Please try again!"
-            userNameTextField.layer.borderWidth = 1
-            userNameTextField.layer.borderColor = UIColor.redColor().CGColor
+            highlightTextField(userNameTextField)
             return false
         }
     }
@@ -181,25 +181,51 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
     // Function to check for password validity
     private func isStringValidEmail(email:String)->Bool{
         do{
-            //Check for special character regular expression
+            //Check for special character regular expression. 
             let specialCharRegEx = try NSRegularExpression(pattern: "[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}", options: .CaseInsensitive)
             if specialCharRegEx.firstMatchInString(email, options: NSMatchingOptions(), range: NSMakeRange(0, email.characters.count)) == nil{
                 errorLabel.text = "Invalid Email format"
-                emailTextField.layer.borderWidth = 1
-                emailTextField.layer.borderColor = UIColor.redColor().CGColor
+                highlightTextField(emailTextField)
                 return false
             }
-            emailTextField.layer.borderWidth = 0
-            emailTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
+            if DataManager.isUserPresentWithEmail(email){
+                errorLabel.text = "User with email \"\(email)\" already exists."
+                highlightTextField(emailTextField)
+                return false
+            }
+            resetTextField(emailTextField)
             errorLabel.text = ""
             return true
         }
         catch{
             errorLabel.text = "Error while creating regular expression. Please try again!"
-            emailTextField.layer.borderWidth = 1
-            emailTextField.layer.borderColor = UIColor.redColor().CGColor
+            highlightTextField(emailTextField)
             return false
         }
     }
     
+    private func highlightTextField(textField:UITextField){
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.redColor().CGColor
+    }
+    
+    private func resetTextField(textField:UITextField){
+        textField.layer.borderWidth = 0
+        textField.layer.borderColor = UIColor.lightGrayColor().CGColor
+    }
+    
+}
+
+//Extension of String to return a hashed value using SHA256 algorithm in CommonCrypto
+extension String{
+    func stringBySHA256() -> String? {
+        guard
+            let encodedData = self.dataUsingEncoding(NSUTF8StringEncoding),
+            let hashResult = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))
+            else { return nil }
+        
+        CC_SHA256(encodedData.bytes, CC_LONG(encodedData.length), UnsafeMutablePointer(hashResult.mutableBytes))
+        let hashedString = hashResult.base64EncodedStringWithOptions([])
+        return hashedString
+    }
 }

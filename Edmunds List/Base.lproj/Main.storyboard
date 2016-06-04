@@ -128,8 +128,8 @@
                                     <segue destination="r6l-Q2-bJB" kind="unwind" unwindAction="cancelRegistration:" id="NoO-r3-7eJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qor-45-l5K" userLabel="Error Label">
-                                <rect key="frame" x="300.5" y="463" width="0.0" height="0.0"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qor-45-l5K" userLabel="Error Label">
+                                <rect key="frame" x="35.5" y="463" width="530" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -176,6 +176,7 @@
                             <constraint firstItem="mW7-cX-4Qm" firstAttribute="top" secondItem="9Ho-4W-JMg" secondAttribute="bottom" constant="10" id="vUs-yQ-Jy5"/>
                             <constraint firstItem="ybi-mT-CVj" firstAttribute="top" secondItem="mW7-cX-4Qm" secondAttribute="bottom" constant="10" id="vXa-pz-YKE"/>
                             <constraint firstItem="dYC-ri-A6K" firstAttribute="top" secondItem="c9m-DH-J0r" secondAttribute="bottom" constant="10" id="yZh-DH-poP"/>
+                            <constraint firstItem="qor-45-l5K" firstAttribute="width" secondItem="M5z-Za-6JE" secondAttribute="width" constant="-70" id="zXs-iQ-kAi"/>
                         </constraints>
                     </view>
                     <connections>
