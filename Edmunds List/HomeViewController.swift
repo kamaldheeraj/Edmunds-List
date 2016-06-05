@@ -10,17 +10,25 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet var userNameTextField: UITextField!
+    
+    
+    @IBOutlet var passwordTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 
+    @IBAction func login(sender: AnyObject) {
+        performSegueWithIdentifier("loginSegue", sender: self)
+    }
+    
+    
     @IBAction func cancelRegistration(segue:UIStoryboardSegue){
         
     }

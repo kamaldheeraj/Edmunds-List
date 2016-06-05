@@ -22,6 +22,10 @@
 		289E686C1D0339C900539747 /* WebserviceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E686B1D0339C900539747 /* WebserviceHelper.swift */; };
 		289E686F1D034C6400539747 /* Car+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E686D1D034C6400539747 /* Car+CoreDataProperties.swift */; };
 		289E68701D034C6400539747 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E686E1D034C6400539747 /* Car.swift */; };
+		289E68721D04612900539747 /* CarsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E68711D04612900539747 /* CarsListCell.swift */; };
+		289E68741D0467F900539747 /* edmundsCarLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 289E68731D0467F900539747 /* edmundsCarLogo.jpg */; };
+		289E68761D04689E00539747 /* edmunds250.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 289E68751D04689E00539747 /* edmunds250.jpeg */; };
+		289E68781D04724900539747 /* DashboardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E68771D04724900539747 /* DashboardDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +47,10 @@
 		289E686B1D0339C900539747 /* WebserviceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebserviceHelper.swift; sourceTree = "<group>"; };
 		289E686D1D034C6400539747 /* Car+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		289E686E1D034C6400539747 /* Car.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		289E68711D04612900539747 /* CarsListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsListCell.swift; sourceTree = "<group>"; };
+		289E68731D0467F900539747 /* edmundsCarLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = edmundsCarLogo.jpg; sourceTree = "<group>"; };
+		289E68751D04689E00539747 /* edmunds250.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = edmunds250.jpeg; sourceTree = "<group>"; };
+		289E68771D04724900539747 /* DashboardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +90,8 @@
 				289E686B1D0339C900539747 /* WebserviceHelper.swift */,
 				289E685C1D030F9F00539747 /* Edmunds List-Bridging-Header.h */,
 				289E68491D01F91F00539747 /* Assets.xcassets */,
+				289E68731D0467F900539747 /* edmundsCarLogo.jpg */,
+				289E68751D04689E00539747 /* edmunds250.jpeg */,
 				289E684E1D01F91F00539747 /* Info.plist */,
 			);
 			path = "Edmunds List";
@@ -90,9 +100,11 @@
 		289E68571D02064B00539747 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				289E68771D04724900539747 /* DashboardDetailViewController.swift */,
 				289E68411D01F91F00539747 /* HomeViewController.swift */,
 				289E68541D0203B400539747 /* RegistrationViewController.swift */,
 				289E68581D0208C900539747 /* DashboardListViewController.swift */,
+				289E68711D04612900539747 /* CarsListCell.swift */,
 				289E685F1D0311B100539747 /* Utils.swift */,
 			);
 			name = ViewControllers;
@@ -179,7 +191,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				289E68741D0467F900539747 /* edmundsCarLogo.jpg in Resources */,
 				289E684D1D01F91F00539747 /* LaunchScreen.storyboard in Resources */,
+				289E68761D04689E00539747 /* edmunds250.jpeg in Resources */,
 				289E684A1D01F91F00539747 /* Assets.xcassets in Resources */,
 				289E68451D01F91F00539747 /* Main.storyboard in Resources */,
 			);
@@ -192,11 +206,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				289E68781D04724900539747 /* DashboardDetailViewController.swift in Sources */,
 				289E686F1D034C6400539747 /* Car+CoreDataProperties.swift in Sources */,
 				289E68591D0208C900539747 /* DashboardListViewController.swift in Sources */,
 				289E68701D034C6400539747 /* Car.swift in Sources */,
 				289E68621D0314FB00539747 /* DataManager.swift in Sources */,
 				289E68691D0315EE00539747 /* User+CoreDataProperties.swift in Sources */,
+				289E68721D04612900539747 /* CarsListCell.swift in Sources */,
 				289E68481D01F91F00539747 /* Edmunds_List.xcdatamodeld in Sources */,
 				289E68601D0311B100539747 /* Utils.swift in Sources */,
 				289E686A1D0315EE00539747 /* User.swift in Sources */,

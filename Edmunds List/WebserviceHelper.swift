@@ -30,4 +30,23 @@ class WebserviceHelper{
         task.resume()
     }
     
+    class func getCarDetails(makeNiceName:String,modelNiceName:String,year:NSNumber,completionHandler:(success:Bool,data:NSData?,error:NSError?)->Void){
+        guard let url = NSURL(string: "https://api.edmunds.com/api/vehicle/v2/\(makeNiceName)/\(modelNiceName)/\(year)/styles?view=full&fmt=json&api_key=ne855ea3mmmyg44qg364cdvk") else{
+            completionHandler(success: false, data: nil, error: nil)
+            return
+        }
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "GET"
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request){
+            data,response,error in
+            if error != nil{
+                completionHandler(success: false, data: data, error: error)
+                return
+            }
+            completionHandler(success: true, data: data, error: error)
+            return
+        }
+        task.resume()
+    }
+    
 }
