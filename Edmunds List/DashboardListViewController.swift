@@ -19,7 +19,9 @@ class DashboardListViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Dashboard"
+        self.navigationItem.title = "Cars Dashboard"
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "home"), style: .Plain, target: self, action: Selector("homeClicked"))
+        self.navigationItem.setRightBarButtonItem(rightBarButtonItem, animated: true)
         carsTableView.frame = self.view.frame
         carsTableView.frame.size.height = self.view.frame.size.height - 60
         carsTableView.delegate = self
@@ -27,14 +29,15 @@ class DashboardListViewController: UIViewController, UITableViewDelegate, UITabl
         carsTableView.registerClass(CarsListCell.self, forCellReuseIdentifier: "carCell")
         carsTableView.bounces = false
         self.view.addSubview(carsTableView)
-        edmundsLogoView.frame.origin.x = 0
-        edmundsLogoView.frame.origin.y = carsTableView.bounds.size.height
-        edmundsLogoView.frame.size.width = carsTableView.bounds.size.width
+        edmundsLogoView.frame.origin.x = (carsTableView.bounds.size.width - 300)/2
+        edmundsLogoView.frame.origin.y = carsTableView.bounds.size.height - 60
+        edmundsLogoView.frame.size.width = 300
         edmundsLogoView.frame.size.height = 60
         edmundsLogoView.backgroundColor = UIColor(red: 191/255, green: 47/255, blue: 55/255, alpha: 1.0)
         edmundsLogoView.contentMode = .Center
-        self.view.addSubview(edmundsLogoView)
         edmundsLogoView.image = UIImage(named: "EdmundsAttribution")
+        self.view.addSubview(edmundsLogoView)
+        edmundsLogoView.bringSubviewToFront(self.view)
         let fetchCarsResult = DataManager.fetchCars(currentOffset, fetchLimit: 20)
         totalCount = fetchCarsResult.totalCount
         list = fetchCarsResult.carList
@@ -52,9 +55,48 @@ class DashboardListViewController: UIViewController, UITableViewDelegate, UITabl
         let car = list![indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("carCell") as! CarsListCell
         cell.accessoryType = .DisclosureIndicator
-        cell.mainLabel.text = car.modelName
+        cell.selectionStyle = .None
+        cell.mainLabel.text = "\(car.modelName!) \(car.year!)"
         cell.subLabel.text = car.makeName
-        cell.carImageView.image = UIImage(named: "edmundsCarLogo.jpg")
+        var makeURLName = ""
+        if car.makeName! == "MINI"{
+            // To handle different in naming convention between logo website and edmunds
+            makeURLName = "Mini"
+        }
+        else if car.makeName! == "FIAT"{
+            // To handle different in naming convention between logo website and edmunds
+            makeURLName = "Fiat"
+        }
+        else if car.makeName!.uppercaseString == car.makeName! {
+            //To handle car names that are acnonyms like GMC,BMW etc
+            makeURLName = car.makeName!.uppercaseString
+        }
+        else if car.makeName! == "McLaren"{
+            // To handle different in naming convention between logo website and edmunds
+            makeURLName = "McLaren"
+        }
+        else if car.makeName! == "Lincoln"{
+            // To handle different in naming convention between logo website and edmunds
+            makeURLName = "Lincoln-Motor"
+        }
+        else{
+            makeURLName = car.makeName!.capitalizedString.stringByReplacingOccurrencesOfString(" ", withString: "-")
+        }
+        // URL to get small logo images.
+        let urlString = "http://www.carlogos.org/uploads/car-logos/\(makeURLName)-logo-1.jpg"
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)){
+            // Calling function to download image in background thread and to cache downloaded image for future use.
+            if let image = Utils.fetchImageWithURL(urlString){
+                dispatch_async(dispatch_get_main_queue()){
+                    cell.carImageView.image = image
+                }
+            }
+            else{
+                dispatch_async(dispatch_get_main_queue()){
+                    cell.carImageView.image = UIImage(named: "edmundsCarLogo.jpg")
+                }
+            }
+        }
         cell.car = car
         return cell
     }
@@ -68,13 +110,12 @@ class DashboardListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     // Function to check if tableview is scrolled to the bottom - 75 offset and fetch next set of cars, reload tableview and flash scroll indicator
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         let offset = scrollView.contentOffset
         let bounds = scrollView.bounds
         let size = scrollView.contentSize
         let y = offset.y + bounds.size.height
-        let h = size.height
-        if y > h - 150 {
+        if y > size.height - 30 {
             if currentOffset < totalCount{
                 guard let carsResult = DataManager.fetchCars(currentOffset, fetchLimit: 20).carList else{
                     return
@@ -92,6 +133,10 @@ class DashboardListViewController: UIViewController, UITableViewDelegate, UITabl
             let destVC = segue.destinationViewController as! DashboardDetailViewController
             destVC.car = (sender as! CarsListCell).car
         }
+    }
+    
+    func homeClicked(){
+        self.performSegueWithIdentifier("homeScreenSegue", sender: self)
     }
 
 }

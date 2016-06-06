@@ -99,9 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if success && data != nil{
                 do{
                     let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers)
-                    print(json)
                     dispatch_async(dispatch_get_main_queue()){
-                        var i = 0
                         guard let makes = json["makes"] as? [NSDictionary] else{
                             return
                         }
@@ -131,8 +129,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 carDictionary["year"] = year
                                 carDictionary["modelYearID"] = modelYearID
                                 DataManager.upsertCar(carDictionary)
-                                i += 1
-                                print(i)
                             }
                         }
                     }

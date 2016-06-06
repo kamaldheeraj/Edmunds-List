@@ -49,6 +49,45 @@ class DashboardDetailViewController: UIViewController {
     }
     
     func fetchCarDetails(){
+        var makeURLName = ""
+        if car.makeName! == "MINI"{
+            // To handle different in naming convention between logo website and edmunds
+            makeURLName = "Mini"
+        }
+        else if car.makeName! == "FIAT"{
+            // To handle different in naming convention between logo website and edmunds
+            makeURLName = "Fiat"
+        }
+        else if car.makeName!.uppercaseString == car.makeName! {
+            //To handle car names that are acnonyms like GMC,BMW etc
+            makeURLName = car.makeName!.uppercaseString
+        }
+        else if car.makeName! == "McLaren"{
+            // To handle different in naming convention between logo website and edmunds
+            makeURLName = "McLaren"
+        }
+        else if car.makeName! == "Lincoln"{
+            // To handle different in naming convention between logo website and edmunds
+            makeURLName = "Lincoln-Motor"
+        }
+        else{
+            makeURLName = car.makeName!.capitalizedString.stringByReplacingOccurrencesOfString(" ", withString: "-")
+        }
+        // URL to get larger logo images.
+        let urlString = "http://www.carlogos.org/uploads/car-logos/\(makeURLName)-logo-2.jpg"
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)){
+            // Calling function to download image in background thread and to cache downloaded image for future use.
+            if let image = Utils.fetchImageWithURL(urlString){
+                dispatch_async(dispatch_get_main_queue()){
+                    self.carDetailImageView.image = image
+                }
+            }
+            else{
+                dispatch_async(dispatch_get_main_queue()){
+                    self.carDetailImageView.image = UIImage(named: "edmunds250.jpeg")
+                }
+            }
+        }
         WebserviceHelper.getCarDetails(car.makeNiceName!, modelNiceName: car.modelNiceName!, year: car.year!){
             success,data,error in
             if success && data != nil && error == nil{
@@ -58,38 +97,52 @@ class DashboardDetailViewController: UIViewController {
                         guard let styles = json["styles"] as? [NSDictionary] else{
                             return
                         }
-                        let style = styles[0]
-                        guard let engine = style["engine"] as? NSDictionary else{
-                            return
-                        }
-                        if let torque = engine["torque"] as? NSNumber{
-                            self.torqueLabel.text = "Torque: \(torque)"
-                        }
-                        if let horsePower = engine["horsepower"] as? NSNumber{
-                            self.horsePowerLabel.text = "HorsePower: \(horsePower)"
-                        }
-                        if let cylinders = engine["cylinder"] as? NSNumber{
-                            self.cylindersLabel.text = "Cylinders: \(cylinders)"
-                        }
-                        if let transmission = style["transmission"] as? NSDictionary {
-                            if let transmissionType = transmission["transmissionType"] as? String{
-                                self.transmissionTypeLabel.text = transmissionType.capitalizedString
+                        if styles.count > 0{
+                            let style = styles[0]
+                            guard let engine = style["engine"] as? NSDictionary else{
+                                return
                             }
-                        }
-                        if let price = style["price"] as? NSDictionary{
-                            if let baseMSRP = price["baseMSRP"] as? NSNumber{
-                                self.msrpLabel.text = "MSRP: $ \(baseMSRP)"
+                            if let torque = engine["torque"] as? NSNumber{
+                                self.torqueLabel.text = "Torque: \(torque)"
                             }
-                        }
-                        if let doors = style["numOfDoors"] as? String{
-                            self.doorsLabel.text = "Doors: \(doors)"
-                        }
-                        if let drive = style["drivenWheels"] as? String{
-                            self.driveLabel.text = "\(drive)".capitalizedString
-                        }
-                        if let mpg = style["MPG"] as? NSDictionary{
-                            if let highway = mpg["highway"] as? String, let city = mpg["city"] as? String{
-                                self.mpgLabel.text = "MPG: \(highway)/\(city)"
+                            if let horsePower = engine["horsepower"] as? NSNumber{
+                                self.horsePowerLabel.text = "HorsePower: \(horsePower)"
+                            }
+                            if let cylinders = engine["cylinder"] as? NSNumber{
+                                self.cylindersLabel.text = "Cylinders: \(cylinders)"
+                            }
+                            if let transmission = style["transmission"] as? NSDictionary {
+                                if let transmissionType = transmission["transmissionType"] as? String{
+                                    self.transmissionTypeLabel.text = transmissionType.capitalizedString
+                                }
+                            }
+                            if let price = style["price"] as? NSDictionary{
+                                if let baseMSRP = price["baseMSRP"] as? NSNumber{
+                                    self.msrpLabel.text = "MSRP: $ \(baseMSRP)"
+                                }
+                                else{
+                                    self.msrpLabel.text = ""
+                                }
+                            }
+                            else{
+                                self.msrpLabel.text = ""
+                            }
+                            if let doors = style["numOfDoors"] as? String{
+                                self.doorsLabel.text = "Doors: \(doors)"
+                            }
+                            if let drive = style["drivenWheels"] as? String{
+                                self.driveLabel.text = "\(drive)".capitalizedString
+                            }
+                            if let mpg = style["MPG"] as? NSDictionary{
+                                if let highway = mpg["highway"] as? String, let city = mpg["city"] as? String{
+                                    self.mpgLabel.text = "MPG: \(highway)/\(city)"
+                                }
+                                else{
+                                    self.mpgLabel.text = ""
+                                }
+                            }
+                            else{
+                                self.mpgLabel.text = ""
                             }
                         }
                     }

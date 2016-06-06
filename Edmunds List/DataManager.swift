@@ -148,4 +148,24 @@ class DataManager{
         }
     }
     
+    class func isLoginValid(userName:String,password:String)->Bool{
+        let managedObjectContext = appDelegate.managedObjectContext
+        let hashedPassword = password.stringBySHA256()!
+        let fetchRequest = NSFetchRequest(entityName: "User")
+        let predicate = NSPredicate(format: "userName = %@ AND password = %@", userName, hashedPassword)
+        fetchRequest.predicate = predicate
+        do{
+            guard let results = try managedObjectContext.executeFetchRequest(fetchRequest) as? [User] else{
+                return false
+            }
+            if results.count > 0{
+                return true
+            }
+            return false
+        }
+        catch{
+            return false
+        }
+    }
+    
 }

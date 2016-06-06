@@ -26,6 +26,11 @@
 		289E68741D0467F900539747 /* edmundsCarLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 289E68731D0467F900539747 /* edmundsCarLogo.jpg */; };
 		289E68761D04689E00539747 /* edmunds250.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 289E68751D04689E00539747 /* edmunds250.jpeg */; };
 		289E68781D04724900539747 /* DashboardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E68771D04724900539747 /* DashboardDetailViewController.swift */; };
+		289E687A1D04ECE300539747 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 289E68791D04ECE300539747 /* background.jpg */; };
+		289E687C1D04F11300539747 /* background1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 289E687B1D04F11300539747 /* background1.jpg */; };
+		289E687E1D04F22500539747 /* background2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 289E687D1D04F22500539747 /* background2.jpg */; };
+		289E68861D04F6C700539747 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E68851D04F6C700539747 /* button.png */; };
+		289E68881D04F87500539747 /* background3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 289E68871D04F87500539747 /* background3.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +56,11 @@
 		289E68731D0467F900539747 /* edmundsCarLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = edmundsCarLogo.jpg; sourceTree = "<group>"; };
 		289E68751D04689E00539747 /* edmunds250.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = edmunds250.jpeg; sourceTree = "<group>"; };
 		289E68771D04724900539747 /* DashboardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardDetailViewController.swift; sourceTree = "<group>"; };
+		289E68791D04ECE300539747 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		289E687B1D04F11300539747 /* background1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background1.jpg; sourceTree = "<group>"; };
+		289E687D1D04F22500539747 /* background2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background2.jpg; sourceTree = "<group>"; };
+		289E68851D04F6C700539747 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		289E68871D04F87500539747 /* background3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background3.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +102,11 @@
 				289E68491D01F91F00539747 /* Assets.xcassets */,
 				289E68731D0467F900539747 /* edmundsCarLogo.jpg */,
 				289E68751D04689E00539747 /* edmunds250.jpeg */,
+				289E68791D04ECE300539747 /* background.jpg */,
+				289E687B1D04F11300539747 /* background1.jpg */,
+				289E68851D04F6C700539747 /* button.png */,
+				289E687D1D04F22500539747 /* background2.jpg */,
+				289E68871D04F87500539747 /* background3.jpg */,
 				289E684E1D01F91F00539747 /* Info.plist */,
 			);
 			path = "Edmunds List";
@@ -191,10 +206,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				289E687E1D04F22500539747 /* background2.jpg in Resources */,
+				289E68881D04F87500539747 /* background3.jpg in Resources */,
 				289E68741D0467F900539747 /* edmundsCarLogo.jpg in Resources */,
 				289E684D1D01F91F00539747 /* LaunchScreen.storyboard in Resources */,
+				289E687C1D04F11300539747 /* background1.jpg in Resources */,
 				289E68761D04689E00539747 /* edmunds250.jpeg in Resources */,
+				289E687A1D04ECE300539747 /* background.jpg in Resources */,
 				289E684A1D01F91F00539747 /* Assets.xcassets in Resources */,
+				289E68861D04F6C700539747 /* button.png in Resources */,
 				289E68451D01F91F00539747 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

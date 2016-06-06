@@ -16,6 +16,9 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet var passwordTextField: UITextField!
     
+    
+    @IBOutlet var reenterPasswordTextField: UITextField!
+    
     @IBOutlet var specialCharacterRequirementLabel: UILabel!
     
     @IBOutlet var numberRequirementLabel: UILabel!
@@ -23,6 +26,13 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet var eightCharactersRequirementLabel: UILabel!
     
     @IBOutlet var errorLabel: UILabel!
+    
+    
+    @IBOutlet var specialCharacterImageView: UIImageView!
+    
+    @IBOutlet var numberImageView: UIImageView!
+    
+    @IBOutlet var eightCharacterImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,34 +60,34 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
     }
     
     
-    //Text Field Delegate
+    //MARK:Text Field Delegate
     
     func textFieldDidChange(textField:UITextField) {
         if textField == passwordTextField{
             if let string = textField.text{
                 if string.rangeOfCharacterFromSet(NSCharacterSet.alphanumericCharacterSet().invertedSet) != nil{
-                    specialCharacterRequirementLabel.backgroundColor = UIColor.greenColor()
+                    specialCharacterImageView.hidden = false
                 }
                 else{
-                    specialCharacterRequirementLabel.backgroundColor = UIColor.lightGrayColor()
+                    specialCharacterImageView.hidden = true
                 }
                 if string.rangeOfCharacterFromSet(NSCharacterSet.decimalDigitCharacterSet()) != nil{
-                    numberRequirementLabel.backgroundColor = UIColor.greenColor()
+                    numberImageView.hidden = false
                 }
                 else{
-                    numberRequirementLabel.backgroundColor = UIColor.lightGrayColor()
+                   numberImageView.hidden = true
                 }
-                if string.characters.count > 8{
-                    eightCharactersRequirementLabel.backgroundColor = UIColor.greenColor()
+                if string.characters.count >= 8{
+                    eightCharacterImageView.hidden = false
                 }
                 else{
-                    eightCharactersRequirementLabel.backgroundColor = UIColor.lightGrayColor()
+                    eightCharacterImageView.hidden = true
                 }
             }
         }
     }
     
-    
+    // MARK: Private Functions
     private func areFieldsValid()->Bool{
         //Check if email is empty
         if emailTextField.text == nil || emailTextField.text == ""{
@@ -114,6 +124,17 @@ class RegistrationViewController: UIViewController,UITextFieldDelegate {
                 return false
             }
         }
+        
+        //Check if passwords match
+        if reenterPasswordTextField.text != passwordTextField.text{
+            highlightTextField(reenterPasswordTextField)
+            errorLabel.text = "Passwords do not match."
+            return false
+        }
+        else{
+            resetTextField(reenterPasswordTextField)
+        }
+        
         return true
     }
     
