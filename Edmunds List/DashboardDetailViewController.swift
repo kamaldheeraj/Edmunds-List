@@ -38,9 +38,13 @@ class DashboardDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeLabel.text = "Make: \(car.makeName!)"
+        makeLabel.text = "\(car.makeName!)"
         modelLabel.text = car.modelName
-        yearLabel.text = "Year: \(String(car.year!))"
+        yearLabel.text = "\(String(car.year!))"
+        carDetailImageView.layer.shadowOffset = CGSize(width: -3, height: 3)
+        carDetailImageView.layer.shadowRadius = 5
+        carDetailImageView.layer.shadowOpacity = 1.0
+        carDetailImageView.clipsToBounds = false
         fetchCarDetails()
     }
     
@@ -103,22 +107,25 @@ class DashboardDetailViewController: UIViewController {
                                 return
                             }
                             if let torque = engine["torque"] as? NSNumber{
-                                self.torqueLabel.text = "Torque: \(torque)"
+                                self.torqueLabel.text = "\(torque)"
                             }
                             if let horsePower = engine["horsepower"] as? NSNumber{
-                                self.horsePowerLabel.text = "HorsePower: \(horsePower)"
+                                self.horsePowerLabel.text = "\(horsePower)"
                             }
                             if let cylinders = engine["cylinder"] as? NSNumber{
-                                self.cylindersLabel.text = "Cylinders: \(cylinders)"
+                                self.cylindersLabel.text = "\(cylinders)"
                             }
                             if let transmission = style["transmission"] as? NSDictionary {
                                 if let transmissionType = transmission["transmissionType"] as? String{
-                                    self.transmissionTypeLabel.text = transmissionType.capitalizedString
+                                    self.transmissionTypeLabel.text = "\(transmissionType.capitalizedString)"
                                 }
                             }
                             if let price = style["price"] as? NSDictionary{
                                 if let baseMSRP = price["baseMSRP"] as? NSNumber{
-                                    self.msrpLabel.text = "MSRP: $ \(baseMSRP)"
+                                    let numberFormatter = NSNumberFormatter()
+                                    numberFormatter.numberStyle = .CurrencyStyle
+                                    let price = numberFormatter.stringFromNumber(baseMSRP)
+                                    self.msrpLabel.text = price
                                 }
                                 else{
                                     self.msrpLabel.text = ""
@@ -128,14 +135,14 @@ class DashboardDetailViewController: UIViewController {
                                 self.msrpLabel.text = ""
                             }
                             if let doors = style["numOfDoors"] as? String{
-                                self.doorsLabel.text = "Doors: \(doors)"
+                                self.doorsLabel.text = "\(doors)"
                             }
                             if let drive = style["drivenWheels"] as? String{
-                                self.driveLabel.text = "\(drive)".capitalizedString
+                                self.driveLabel.text = "\(drive.capitalizedString)"
                             }
                             if let mpg = style["MPG"] as? NSDictionary{
                                 if let highway = mpg["highway"] as? String, let city = mpg["city"] as? String{
-                                    self.mpgLabel.text = "MPG: \(highway)/\(city)"
+                                    self.mpgLabel.text = "\(highway)/\(city)"
                                 }
                                 else{
                                     self.mpgLabel.text = ""
